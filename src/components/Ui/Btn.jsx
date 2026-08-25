@@ -1,4 +1,4 @@
-import { Container } from '../index';
+import { Container } from '../ComponentExports';
 
 export default function Btn({ children, type = 'button', BtnName, className = '', ...props }) {
   return (

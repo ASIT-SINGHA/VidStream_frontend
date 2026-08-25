@@ -1,4 +1,4 @@
-import { Container } from '../index.js';
+import { Container } from '../ComponentExports.js';
 import { useId } from 'react';
 
 export default function Input({
