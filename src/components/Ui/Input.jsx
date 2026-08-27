@@ -1,4 +1,4 @@
-import { Container } from '../ComponentExports.js';
+import { Container, FormError } from '../ComponentExports.js';
 import { useId } from 'react';
 
 export default function Input({
@@ -7,7 +7,7 @@ export default function Input({
   accept,
   className = '',
   label,
-  error = '',
+  error=null,
   ref,
   register,
   ...props
@@ -17,7 +17,10 @@ export default function Input({
   if (type == 'file') ifFile = true;
   return (
     <Container>
-      {label && <label htmlFor={id}>{label}</label>}
+      <div>
+        {label && <label htmlFor={id}>{label}:</label>}
+        
+        </div>
       <input
         type={type}
         id={id}
@@ -28,7 +31,7 @@ export default function Input({
         {...props}
         ref={ref}
       />
-      {error && <FormError message={error.message ?? error} />}
+      {error && <FormError message={error.message || error} />}
     </Container>
   );
 }
