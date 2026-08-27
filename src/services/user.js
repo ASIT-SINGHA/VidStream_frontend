@@ -1,11 +1,29 @@
 import axiosInstead from './api';
 
-export const registerUser = async (formData) =>
-  await axiosInstead.past('/users/register', formData, {
-    Headers: {
+export const registerUser = async (formData) => {
+  const dataToSend = new FormData();
+
+  dataToSend.append('fullName', formData.fullName);
+  dataToSend.append('username', formData.username);
+  dataToSend.append('email', formData.email);
+  dataToSend.append('password', formData.password);
+
+  if (formData.avatar?.length > 0) {
+    dataToSend.append('avatar', formData.avatar[0]);
+  }
+
+  if (formData.coverImage?.length > 0) {
+    dataToSend.append('coverImage', formData.coverImage[0]);
+  }
+
+  const res = await axiosInstead.post('/users/register', dataToSend, {
+    headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+  return res.data;
+};
+
 export const login = async (data) => await axiosInstead.post('/users/login', data);
 export const logout = async (data) => await axiosInstead.post('/users/logout', data);
 export const refreshToken = async (data) => await axiosInstead.post('/users/refresh-token', data);
