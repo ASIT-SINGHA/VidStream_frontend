@@ -2,7 +2,6 @@ import { Container } from '../ComponentExports.js';
 import { useId } from 'react';
 
 export default function Input({
-  register,
   type = 'text',
   placeholder,
   accept,

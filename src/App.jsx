@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router';
-import { Container, PublicLayout, ProtectedLayout } from './components/index.js';
+import { Container, PublicLayout, ProtectedLayout } from './components/ComponentExports.js';
 import { Register, Login, Home } from './pages/PageExports.js';
 
 function App() {
