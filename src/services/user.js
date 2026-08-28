@@ -15,13 +15,16 @@ export const registerUser = async (formData) => {
   if (formData.coverImage?.length > 0) {
     dataToSend.append('coverImage', formData.coverImage[0]);
   }
-
+try{
   const res = await axiosInstead.post('/users/register', dataToSend, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
   return res.data;
+} catch (err) {
+    throw new Error(err);
+  }
 };
 
 export const login = async (data) => await axiosInstead.post('/users/login', data);

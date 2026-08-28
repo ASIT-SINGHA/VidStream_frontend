@@ -19,7 +19,6 @@ export function useSignUp() {
     setApiError('');
 
     try {
-      console.log(formData)
       await registerUser(formData);
       navigate('/login');
     } catch (error) {
