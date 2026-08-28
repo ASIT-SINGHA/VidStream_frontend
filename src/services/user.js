@@ -15,19 +15,31 @@ export const registerUser = async (formData) => {
   if (formData.coverImage?.length > 0) {
     dataToSend.append('coverImage', formData.coverImage[0]);
   }
-try{
-  const res = await axiosInstead.post('/users/register', dataToSend, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return res.data;
-} catch (err) {
+  try {
+    const res = await axiosInstead.post('/users/register', dataToSend, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return res.data;
+  } catch (err) {
     throw new Error(err);
   }
 };
 
-export const login = async (data) => await axiosInstead.post('/users/login', data);
+export const loginUser = async (formData) => {
+  const dataToSend = new FormData();
+  dataToSend.append('email', formData.email);
+  dataToSend.append('password', formData.password);
+  try {
+    const res = await axiosInstead.post('/users/login', dataToSend);
+    console.log(res.data);
+    
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 export const logout = async (data) => await axiosInstead.post('/users/logout', data);
 export const refreshToken = async (data) => await axiosInstead.post('/users/refresh-token', data);
 export const changePassword = async (data) =>
