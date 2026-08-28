@@ -28,7 +28,7 @@ export default function Register() {
               <Input
                 label="Full Name"
                 placeholder="Anik Ghosh"
-                error={errors.fullName}
+                error={errors?.fullName?.message}
                 className=""
                 {...register('fullName')}
               />
@@ -37,7 +37,7 @@ export default function Register() {
                 <Input
                   label="Username"
                   placeholder="anikghose"
-                  error={errors.username}
+                  error={errors?.username?.message}
                   {...register('username')}
                 />
 
@@ -45,7 +45,7 @@ export default function Register() {
                   label="Email"
                   type="email"
                   placeholder="anik@example.com"
-                  error={errors.email}
+                  error={errors?.email?.message}
                   {...register('email')}
                 />
               </div>
@@ -54,7 +54,7 @@ export default function Register() {
                 label="Password"
                 type="password"
                 placeholder="••••••••"
-                error={errors.password}
+                error={errors?.password?.message}
                 {...register('password')}
               />
 
@@ -62,14 +62,14 @@ export default function Register() {
                 <Input
                   type="file"
                   label="Profile Picture"
-                  error={errors.avatar}
+                  error={errors?.avatar?.message}
                   {...register('avatar')}
                 />
 
                 <Input
                   type="file"
                   label="Cover Image"
-                  error={errors.coverImage}
+                  error={errors?.coverImage?.message}
                   {...register('coverImage')}
                 />
               </div>

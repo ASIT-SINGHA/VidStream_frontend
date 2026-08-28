@@ -36,8 +36,7 @@ export default function Input({
         {...props}
         ref={ref}
       />
-
-      {error && <FormError message={error.message || error} />}
+      {error && <FormError message={error} />}
     </div>
   );
 }
