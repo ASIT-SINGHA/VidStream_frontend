@@ -26,7 +26,7 @@ const secondaryLinks = [
 function SideBar({ isSidebarOpen }) {
   return (
     <aside className="w-fit h-dvh border-r border-stone-200 bg-white shadow-sm">
-      <div className="space-y-2 p-3">
+      <div className="space-y-2 p-2">
         <div className="space-y-1">
           {primaryLinks.map(({ label, icon: Icon }) => (
             <button

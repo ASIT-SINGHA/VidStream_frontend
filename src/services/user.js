@@ -1,4 +1,5 @@
 import axiosInstead from './api';
+import useAuthStore from "../store/useAuthStore.js"
 
 export const registerUser = async (formData) => {
   const dataToSend = new FormData();
@@ -32,15 +33,20 @@ export const loginUser = async (formData) => {
   dataToSend.append('email', formData.email);
   dataToSend.append('password', formData.password);
   try {
-    const res = await axiosInstead.post('/users/login', dataToSend);
-    console.log(res.data);
-    
+    const res = await axiosInstead.post('/users/login', dataToSend);    
     return res.data;
   } catch (err) {
     throw new Error(err);
   }
 };
-export const logout = async (data) => await axiosInstead.post('/users/logout', data);
+export const logoutUser = async (data) => {  
+  try {
+    await axiosInstead.post('/users/logout',data)  
+    
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 export const refreshToken = async (data) => await axiosInstead.post('/users/refresh-token', data);
 export const changePassword = async (data) =>
   await axiosInstead.post('/users/change-password', data);

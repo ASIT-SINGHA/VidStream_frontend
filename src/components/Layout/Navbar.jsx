@@ -9,8 +9,12 @@ function Navbar({ setIsSidebarOpen, isSidebarOpen }) {
   const user = useAuthStore((state) => state.user);
   const [dpTogle, setdpTogle] = useState(false);
 
+  const profileImage =
+    user?.avatar ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.fullName || user?.username || 'User')}`;
+
   function handleDPTogle() {
-    setdpTogle(!dpTogle);
+    setdpTogle((prev) => !prev);
   }
 
   return (
@@ -45,16 +49,21 @@ function Navbar({ setIsSidebarOpen, isSidebarOpen }) {
               <Add className="h-4 w-4" />
               <span>Create</span>
             </Btn>
-            <Btn className="flex h-10 w-10 items-center justify-center rounded-full text-stone-700 transition hover:bg-stone-100 hover:text-stone-900">
-              <Notifications className="h-5 w-5" />
-            </Btn>
 
             <div className="relative px-4">
               <Btn
                 onClick={handleDPTogle}
-                className="flex h-10 w-10  items-center justify-center rounded-full bg-stone-900 text-white transition hover:bg-stone-700"
+                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-stone-900 text-white transition hover:bg-stone-700"
               >
-                {isAuth ? <img src={user.avatar} /> : <Person className="h-5 w-5" />}
+                {isAuth ? (
+                  <img
+                    src={profileImage}
+                    alt={user?.fullName || 'User profile'}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <Person className="h-5 w-5" />
+                )}
               </Btn>
 
               {dpTogle && <ProfilePictureDialog dpTogle={dpTogle} />}
