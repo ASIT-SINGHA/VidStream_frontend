@@ -1,17 +1,26 @@
 import { Link } from 'react-router';
 import { Menu, Add, Person, Notifications } from '@mui/icons-material';
-import { Btn, Container, SearchBar, SideBar } from '../ComponentExports';
+import { Btn, Container, ProfilePictureDialog, SearchBar, SideBar } from '../ComponentExports';
+import useAuthStore from '../../store/useAuthStore.js';
+import { useState } from 'react';
 
-function Navbar({setIsSidebarOpen,isSidebarOpen}) {
+function Navbar({ setIsSidebarOpen, isSidebarOpen }) {
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const user = useAuthStore((state) => state.user);
+  const [dpTogle, setdpTogle] = useState(false);
+
+  function handleDPTogle() {
+    setdpTogle(!dpTogle);
+  }
 
   return (
     <Container>
       <header className="border-b border-stone-200 bg-white/90 backdrop-blur-sm">
-        <nav className="flex items-center justify-between gap-4 py-3">
+        <nav className="flex items-center justify-between gap-4 py-1">
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={()=>setIsSidebarOpen(!isSidebarOpen)}
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="flex h-10 w-10 items-center justify-center rounded-full text-stone-700 transition hover:bg-stone-100 hover:text-stone-900"
               aria-label="Toggle navigation menu"
             >
@@ -39,15 +48,19 @@ function Navbar({setIsSidebarOpen,isSidebarOpen}) {
             <Btn className="flex h-10 w-10 items-center justify-center rounded-full text-stone-700 transition hover:bg-stone-100 hover:text-stone-900">
               <Notifications className="h-5 w-5" />
             </Btn>
-            <Btn className="flex h-10 w-10 items-center justify-center rounded-full bg-stone-900 text-white transition hover:bg-stone-700">
-              <Person className="h-5 w-5" />
-            </Btn>
+
+            <div className="relative px-4">
+              <Btn
+                onClick={handleDPTogle}
+                className="flex h-10 w-10  items-center justify-center rounded-full bg-stone-900 text-white transition hover:bg-stone-700"
+              >
+                {isAuth ? <img src={user.avatar} /> : <Person className="h-5 w-5" />}
+              </Btn>
+
+              {dpTogle && <ProfilePictureDialog dpTogle={dpTogle} />}
+            </div>
           </div>
         </nav>
-
-        <div className="px-4 pb-3 md:hidden">
-          <SearchBar />
-        </div>
       </header>
     </Container>
   );
