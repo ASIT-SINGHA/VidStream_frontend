@@ -13,7 +13,9 @@ export default function PublicLayout() {
             m-2
         "
     >
-      <Outlet />
+      <main className="flex-1 w-full">
+        <Outlet />
+      </main>
     </div>
   );
 }
