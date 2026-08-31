@@ -10,6 +10,7 @@ const useAuthStore = create(
 
       login: (user, accessToken) => set({ user, accessToken, isAuth: true }),
       logout: () => set({ user: null, accessToken: null, isAuth: false }),
+      setUser : (user) => set({ user }),
     }),
     {
       name: 'vidstream-auth',

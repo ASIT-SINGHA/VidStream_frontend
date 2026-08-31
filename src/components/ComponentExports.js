@@ -9,6 +9,8 @@ import Navbar from './Layout/Navbar.jsx';
 import SearchBar from './Ui/searchBar.jsx';
 import SideBar from './Layout/SideBar.jsx';
 import ProfilePictureDialog from './Layout/ProfilePictureDialog.jsx';
+import UpdateCoverImage from './Ui/UpdateCoverImage.jsx';
+import UpdateAvatar from './Ui/UpdateAvatar.jsx';
 export {
   ProtectedLayout,
   PublicLayout,
@@ -21,4 +23,6 @@ export {
   SearchBar,
   SideBar,
   ProfilePictureDialog,
+  UpdateCoverImage,
+  UpdateAvatar,
 };
