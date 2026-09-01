@@ -1,4 +1,4 @@
-import { Container,UpdateAvatar,UpdateCoverImage  } from "../components/ComponentExports.js"
+import { AccountDetailsUpdate, Container,UpdateAvatar,UpdateCoverImage  } from "../components/ComponentExports.js"
 
 
 function Profile() {
@@ -11,6 +11,9 @@ function Profile() {
   <div className=" flex ">
     <div>
       <UpdateAvatar/>
+    </div>
+    <div>
+      <AccountDetailsUpdate/>
     </div>
   </div>
   

@@ -1,17 +1,11 @@
 import { FormError } from '../ComponentExports.js';
 import { useId } from 'react';
+import React from 'react';
 
-export default function Input({
-  type = 'text',
-  placeholder,
-  accept,
-  className = '',
-  label,
-  error = null,
+function Input(
+  { type = 'text', placeholder, accept, className = '', label, error = null, register, ...props },
   ref,
-  register,
-  ...props
-}) {
+) {
   const id = useId();
   const inputClass =
     type === 'file'
@@ -40,3 +34,5 @@ export default function Input({
     </div>
   );
 }
+
+export default React.forwardRef(Input);

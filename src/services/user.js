@@ -55,7 +55,7 @@ export const changePassword = async (data) =>
 
 export const getCurrentUser = async (data) => await axiosInstead.get('/users/get-user', data);
 
-export const updateAccoundDetails = async (data) => {
+export const updateAccoundDetailsService = async (data) => {
   const dataToSend = new FormData();
   dataToSend.append('fullName', data.fullName);
   dataToSend.append('email', data.email);

@@ -11,6 +11,7 @@ import SideBar from './Layout/SideBar.jsx';
 import ProfilePictureDialog from './Layout/ProfilePictureDialog.jsx';
 import UpdateCoverImage from './Ui/UpdateCoverImage.jsx';
 import UpdateAvatar from './Ui/UpdateAvatar.jsx';
+import AccountDetailsUpdate from './Ui/AccountDetailsUpdate.jsx';
 export {
   ProtectedLayout,
   PublicLayout,
@@ -25,4 +26,5 @@ export {
   ProfilePictureDialog,
   UpdateCoverImage,
   UpdateAvatar,
+  AccountDetailsUpdate,
 };
