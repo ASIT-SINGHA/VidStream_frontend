@@ -46,3 +46,14 @@ export const updateAccoundDetailsSchema = z.object({
   fullName: z.string().min(3, 'Full name must be atleast 3 charactor'),
   email: z.string().email('Invalid email address'),
 });
+
+export const changePasswordSchema = z
+  .object({
+    oldPassword: z.string().min(6, 'password must be atleast 6 character'),
+    newPassword: z.string().min(6, 'password must be atleast 6 character'),
+    confirmPassword: z.string().min(6, 'password must be atleast 6 character'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });

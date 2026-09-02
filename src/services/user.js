@@ -1,6 +1,5 @@
 import axiosInstead from './api';
 
-
 export const registerUser = async (formData) => {
   const dataToSend = new FormData();
 
@@ -25,7 +24,7 @@ export const registerUser = async (formData) => {
     return res.data;
   } catch (err) {
     const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    throw new Error(message);
   }
 };
 
@@ -37,8 +36,8 @@ export const loginUser = async (formData) => {
     const res = await axiosInstead.post('/users/login', dataToSend);
     return res.data;
   } catch (err) {
-   const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+    throw new Error(message);
   }
 };
 
@@ -46,15 +45,27 @@ export const logoutUser = async (data) => {
   try {
     await axiosInstead.post('/users/logout', data);
   } catch (err) {
-   const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+    throw new Error(message);
   }
 };
 
 export const refreshToken = async (data) => await axiosInstead.post('/users/refresh-token', data);
 
-export const changePassword = async (data) =>
-  await axiosInstead.post('/users/change-password', data);
+export const changePasswordService = async (formData) => {
+  const dataToSend = new FormData();
+  dataToSend.append('oldPassword', formData.oldPassword);
+  dataToSend.append('newPassword', formData.newPassword);
+  dataToSend.append('confirmPassword', formData.confirmPassword);
+  try {
+    const res = await axiosInstead.post('/users/change-password', dataToSend);
+
+    return res.data;
+  } catch (err) {
+    const message = err?.response?.data?.message || err.message || 'Somethin went wrong';
+    throw new Error(message);
+  }
+};
 
 export const getCurrentUser = async (data) => await axiosInstead.get('/users/get-user', data);
 
@@ -67,7 +78,7 @@ export const updateAccoundDetailsService = async (data) => {
     return res.data;
   } catch (err) {
     const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    throw new Error(message);
   }
 };
 
@@ -85,7 +96,7 @@ export const updateAvatar = async (formData) => {
     return res.data;
   } catch (err) {
     const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    throw new Error(message);
   }
 };
 
@@ -103,7 +114,7 @@ export const updateCoverImage = async (formData) => {
     return res.data;
   } catch (err) {
     const message = err.response?.data?.message || err.message || 'Something went wrong';
-  throw new Error(message);
+    throw new Error(message);
   }
 };
 
