@@ -1,12 +1,13 @@
-import { Edit } from '@mui/icons-material';
+import { Check, Edit } from '@mui/icons-material';
 import { useCoverImage } from '../../hooks/useCoverImage.js';
 import useAuthStore from '../../store/useAuthStore.js';
 import { ApiError, Btn, Input, Container } from '../ComponentExports.js';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { mergeRef } from '../../utils/mergeRefs.js';
 
 export default function UpdateCoverImage() {
   const user = useAuthStore((state) => state.user);
-  const [trackUpload, setTrackUpload] = useState(false);
+  const coverImageRef = useRef(null);
 
   const {
     register,
@@ -14,8 +15,25 @@ export default function UpdateCoverImage() {
     formState: { errors },
     onSubmit,
     isSubmitting,
+    setIsSubmitting,
     apiError,
-  } = useCoverImage(trackUpload,setTrackUpload);
+  } = useCoverImage();
+
+  useEffect(() => {
+    if (isSubmitting) {
+      coverImageRef.current?.click();
+    }
+  }, [isSubmitting]);
+
+  const handleBtnClick = () => {
+    if (!isSubmitting) {
+      setIsSubmitting(true);
+    } else {
+      handleSubmit(onSubmit)();
+    }
+  };
+
+  const { ref: rhfRef, ...coverImageReg } = register('coverImage');
 
   return (
     <Container>
@@ -23,24 +41,25 @@ export default function UpdateCoverImage() {
         <img src={user.coverImage} alt="coverImage" />
         <ApiError message={apiError} type="error" />
 
-        {trackUpload && (
+        {isSubmitting && (
           <div className=" flex">
             <Input
               type="file"
               accept={'image/*'}
               error={errors?.coverImage?.message}
-              {...register('coverImage')}
+              register={coverImageReg}
+              ref={mergeRef(rhfRef, coverImageRef)}
+              className="hidden"
             />
-            <Btn type="submit" BtnName="Done" className="border-2 border-amber-300 p-2" />
           </div>
         )}
 
         <Btn
-          onClick={() => {
-            setTrackUpload((trackUpload) =>!trackUpload);
-          }}
+          type="button"
+          onClick={handleBtnClick}
+          // disabled={isSubmitting}
         >
-          <Edit />
+          {isSubmitting ? <Check /> : <Edit />}
         </Btn>
       </form>
     </Container>

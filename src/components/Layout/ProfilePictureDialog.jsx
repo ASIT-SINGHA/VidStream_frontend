@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import useAuthStore from '../../store/useAuthStore.js';
 import { Btn } from '../ComponentExports.js';
 import { logoutUser } from '../../services/user.js';
@@ -50,14 +50,18 @@ function ProfilePictureDialog({ dpTogle }) {
 
           <div className="px-2 py-2">
             <div className="space-y-1">
-              <Btn
-                BtnName="View channel"
-                className="w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-stone-700 transition hover:bg-stone-100"
-              />
-              <Btn
-                BtnName="Go to profile"
-                className="w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-stone-700 transition hover:bg-stone-100"
-              />
+              <Link to="/deshboard">
+                <Btn
+                  BtnName="View channel"
+                  className="w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+                />
+              </Link>
+              <Link to="/profile">
+                <Btn
+                  BtnName="Go to profile"
+                  className="w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+                />
+              </Link>
 
               <button
                 type="button"

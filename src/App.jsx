@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import { Container, PublicLayout, ProtectedLayout } from './components/ComponentExports.js';
-import { Register, Login, Home } from './pages/PageExports.js';
+import { Register, Login, Home, Deshboard, Profile } from './pages/PageExports.js';
 
 function App() {
   return (
@@ -14,6 +14,8 @@ function App() {
         {/*private routes */}
         <Route element={<ProtectedLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/deshboard" element={<Deshboard />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Container>

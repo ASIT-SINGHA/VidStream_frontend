@@ -19,8 +19,9 @@ export default function AccountDetailsUpdate() {
     formState: { errors },
     onSubmit,
     isSubmitting,
+    setIsSubmitting,
     apiError,
-  } = useAccountDetailsUpdate(trackUpload, setTrackUpload);
+  } = useAccountDetailsUpdate();
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
