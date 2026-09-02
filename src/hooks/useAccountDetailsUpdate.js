@@ -1,37 +1,13 @@
-import { useState } from 'react';
 import useAuthStore from '../store/useAuthStore';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import useSubmitForm from './useSubmitForm';
 import { updateAccoundDetailsService } from '../services/user';
 import { updateAccoundDetailsSchema } from '../utils/validateSchema';
 
-export default function useAccountDetailsUpdate(trackUpload, setTrackUpload) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [apiError, setApiError] = useState('');
+export default function useAccountDetailsUpdate() {
   const setUser = useAuthStore((state) => state.setUser);
 
-  const form = useForm({
-    resolver: zodResolver(updateAccoundDetailsSchema),
+  return useSubmitForm(updateAccoundDetailsSchema, updateAccoundDetailsService, async (res) => {
+    await setUser(res.data);
+    setIsSubmitting(!isSubmitting);
   });
-
-  const onSubmit = async (formData) => {
-    setIsSubmitting(true);
-    setApiError('');    
-    try {
-      const res = await updateAccoundDetailsService(formData);
-      await setUser(res.data);
-      setTrackUpload((trackUpload) => !trackUpload);
-    } catch (error) {
-      setApiError(error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return {
-    ...form,
-    onSubmit,
-    isSubmitting,
-    apiError,
-  };
 }

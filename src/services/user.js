@@ -24,7 +24,8 @@ export const registerUser = async (formData) => {
     });
     return res.data;
   } catch (err) {
-    throw new Error(err);
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
@@ -36,15 +37,17 @@ export const loginUser = async (formData) => {
     const res = await axiosInstead.post('/users/login', dataToSend);
     return res.data;
   } catch (err) {
-    throw new Error(err);
+   const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
 export const logoutUser = async (data) => {
   try {
     await axiosInstead.post('/users/logout', data);
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+   const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
@@ -62,8 +65,9 @@ export const updateAccoundDetailsService = async (data) => {
   try {
     const res = await axiosInstead.patch('/users/update-accound-details', dataToSend);
     return res.data;
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
@@ -79,8 +83,9 @@ export const updateAvatar = async (formData) => {
       },
     });
     return res.data;
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
@@ -96,8 +101,9 @@ export const updateCoverImage = async (formData) => {
       },
     });
     return res.data;
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+    const message = err.response?.data?.message || err.message || 'Something went wrong';
+  throw new Error(message);
   }
 };
 
